@@ -8,7 +8,7 @@ import csv
 NAME = "糖尿病"
 
 YEAR_LIST = [
-    "9512", "9612", "9712", "9812", "9912", "10006", "10013", "10012", "10106", "10113", "10112", "10206", "10213", "10212", "10306", "10313", "10312", "10406", "10413", "10412", "10506", "10513", "10512", "10606", "10613", "10612"
+    "9512", "9612", "9712", "9812", "9912", "10006", "10013", "10012", "10106", "10113", "10112", "10206", "10213", "10212","10306", "10313", "10312", "10406", "10413", "10412", "10506", "10513", "10512", "10606", "10613", "10612", "103A3", "103A6", "103A9", "103AY", "104A3", "104A6" , "104A9", "104AY", "105A3", "105A6", "105A9", "105AY", "106A3", "106A6"
 ]
 
 YEAR_DICT = {
@@ -37,7 +37,21 @@ YEAR_DICT = {
     "10512": "105年全年",
     "10606": "106年上半年",
     "10613": "106年下半年",
-    "10612": "106年全年"
+    "10612": "106年全年",
+	"103A3": "103年1月-3月",
+	"103A6": "103年1月-6月",
+	"103A9": "103年1月-9月",
+	"103AY": "103年1月-12月",
+	"104A3": "104年1月-3月",
+	"104A6": "104年1月-6月",
+	"104A9": "104年1月-9月",
+	"104AY": "104年1月-12月",
+	"105A3": "105年1月-3月",
+	"105A6": "105年1月-6月",
+	"105A9": "105年1月-9月",
+	"105AY": "105年1月-12月",
+	"106A3": "106年1月-3月",
+	"106A6": "106年1月-6月",
 }
 
 DM_OPTION = [
@@ -90,7 +104,7 @@ def getTableData(year, option):
         table = driver.find_element_by_id("ContentPlaceHolder1_GV_List")
         first_line = True
 
-        with tqdm(total=len(table.find_elements_by_tag_name("tr")-1)) as pbar:
+        with tqdm(total=len(table.find_elements_by_tag_name("tr"))-1) as pbar:
             for row in table.find_elements_by_tag_name("tr"):
                 if first_line:
                     first_line = False
@@ -110,11 +124,13 @@ def getTableData(year, option):
                 pbar.update(1)
         dict2CSV(DATA, year, option)
     except Exception as e:
-        print(e)
+       print(e)
     driver.close()
 
 for option in DM_OPTION:
+    option = str(option)
     for year in YEAR_LIST:
-        print("{} {}".format(YEAR_DICT[year], DM_DICT[option]))
+        year = str(year)
+        print("{} {}".format(str(YEAR_DICT[year]), str(DM_DICT[option])))
         getTableData(year, option)
     

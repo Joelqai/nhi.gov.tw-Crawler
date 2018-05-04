@@ -63,7 +63,7 @@ def getTableData(year, option):
         table = driver.find_element_by_id("ContentPlaceHolder1_GV_List")
         first_line = True
 
-        with tqdm(total=len(table.find_elements_by_tag_name("tr")-1)) as pbar:
+        with tqdm(total=len(table.find_elements_by_tag_name("tr"))-1) as pbar:
             for row in table.find_elements_by_tag_name("tr"):
                 if first_line:
                     first_line = False
