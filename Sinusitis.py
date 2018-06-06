@@ -28,7 +28,7 @@ SINUSITIS_DICT = {
 
 def dict2CSV(data, year, option):
     keys = data[0].keys()
-    with open('{}/{}-{}.csv'.format(NAME, YEAR_DICT[year], SINUSITIS_DICT[option]), 'w', encoding="utf8") as f:
+    with open('{}/{}_{}.csv'.format(NAME, YEAR_DICT[year], SINUSITIS_DICT[option]), 'w', encoding="utf8") as f:
         dict_writer = csv.DictWriter(f, keys)
         dict_writer.writeheader()
         dict_writer.writerows(data)
@@ -38,7 +38,7 @@ def checkExist(year, option):
     import os.path
     if not os.path.isdir(NAME):
         os.makedirs(NAME)
-    if os.path.isfile("{}/{}-{}.csv".format(NAME, YEAR_DICT[year], SINUSITIS_DICT[option])):
+    if os.path.isfile("{}/{}_{}.csv".format(NAME, YEAR_DICT[year], SINUSITIS_DICT[option])):
         return True
     return False
 
